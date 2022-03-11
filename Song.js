@@ -1,12 +1,12 @@
 class Song {
-    constructor(nombre, año, duracion, artista, genero) {
-        this.duracion = duracion;
-        this.nombre = nombre;
-        this.artista = artista;
-        this.año = año;
+    constructor(name, year, duration, artist) {
+        this.duration = duration;
+        this.name = name;
+        this.artist = artist;
+        this.year = year;
 
     }
     showAllSongs() {
-        return this.nombre + " (" + this.año + ") - [feat." + this.artista + "] - " + this.duracion + ' segundos';
+        return this.name + " (From High School Musical - " + this.year + ") - [feat." + this.artist + "] - " + this.duration + ' seconds';
     }
 }
