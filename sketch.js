@@ -1,8 +1,10 @@
 let logic;
+let player;
 
 function setup() {
   createCanvas(1920, 1080);
   logic = new Logic(this);
+  player = new MusicPlayer(this);
 }
 
 function draw() {
@@ -25,6 +27,21 @@ function mousePressed() {
         logic.screen = 3;
       }
       break;
+    case 1:
+      if (mouseX > 347 && mouseY > 32 && mouseX < 486 && mouseY < 52) {
+        logic.screen = 0;
+      }
+      player.playSongBySong();
+      break;
+    case 2:
+      if (mouseX > 347 && mouseY > 32 && mouseX < 486 && mouseY < 52) {
+        logic.screen = 0;
+      }
+      break;
+    case 3:
+      if (mouseX > 347 && mouseY > 32 && mouseX < 486 && mouseY < 52) {
+        logic.screen = 0;
+      }
+      break;
   }
-  logic.playSongBySong();
 }
