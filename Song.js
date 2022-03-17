@@ -1,5 +1,5 @@
 class Song {
-    constructor(name, year, duration, artist) {
+    constructor({name, year, duration, artist}) {
         this.duration = duration;
         this.name = name;
         this.artist = artist;
