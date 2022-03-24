@@ -7,7 +7,4 @@ class Song {
         this.audio = audio; 
 
     }
-    showAllSongs() {
-        return this.name + " (From High School Musical - " + this.year + ") - [feat." + this.artist + "] - " + this.duration + ' seconds';
-    }
 }
