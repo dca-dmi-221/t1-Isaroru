@@ -9,7 +9,7 @@ class MusicPlayer {
         this.s6 = this.app.loadSound('sources/Bop-To-The-Top.mp3');
         this.s7 = this.app.loadSound('sources/Breaking-Free.mp3');
         this.s8 = this.app.loadSound('sources/We_re-All-In-This-Together.mp3');
-
+        
         this.s9 = this.app.loadSound('sources/What-Time-Is-It.mp3');
         this.s10 = this.app.loadSound('sources/Fabulous.mp3');
         this.s11 = this.app.loadSound('sources/Work-This-Out.mp3');
@@ -19,9 +19,23 @@ class MusicPlayer {
         this.s15 = this.app.loadSound('sources/Everyday.mp3');
         this.s16 = this.app.loadSound('sources/All-For-One.mp3');
 
+        this.s17 = this.app.loadSound('sources/Now-or-Never.mp3');
+        this.s18 = this.app.loadSound('sources/Right-Here_-Right.mp3');
+        this.s19 = this.app.loadSound('sources/I-Want-It-All.mp3');
+        this.s20 = this.app.loadSound('sources/Can-I-Have-This-Dance.mp3');
+        this.s21 = this.app.loadSound('sources/A-Night-to-Remember.mp3');
+        this.s22 = this.app.loadSound('sources/Just-Wanna-Be-With-You.mp3');
+        this.s23 = this.app.loadSound('sources/The-Boys-Are-Back.mp3');
+        this.s24 = this.app.loadSound('sources/Scream.mp3');
+
+        this.cover1 = this.app.loadImage('sources/cover 1.png');
+        this.cover2 = this.app.loadImage('sources/cover 2.png');
+        this.cover3 = this.app.loadImage('sources/cover 3.png');
+
         this.playlists = [];
         this.init();
     }
+
     init() {
         this.playlists.push(new Playlist('HSM1'));
         //playlist 1
@@ -30,7 +44,7 @@ class MusicPlayer {
             year: 2006,
             duration: 197,
             artist: 'Vanessa Hudgens & Zac Efron',
-            audio: this.s1
+            audio: this.s1,
         }));
         this.playlists[0].files.push(new Song({
             name: 'Getcha Head In The Game',
@@ -61,7 +75,7 @@ class MusicPlayer {
             audio: this.s5
         }));
         this.playlists[0].files.push(new Song({
-            name: 'Bop-To-The-Top',
+            name: 'Bop To The Top',
             year: 2006,
             duration: 108,
             artist: 'Ashley Tisdale & Lucas Grabeel',
@@ -141,101 +155,195 @@ class MusicPlayer {
             audio: this.s16
         }));
 
+        //playlist 3
+        this.playlists.push(new Playlist('HSM3'));
+        this.playlists[2].files.push(new Song({
+            name: 'Now or Never',
+            year: 2008,
+            duration: 273,
+            artist: 'Cast of HSM',
+            audio: this.s17
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'Right Here Right Now',
+            year: 2008,
+            duration: 238,
+            artist: 'Ashley Tisdale & Lucas Grabeel',
+            audio: this.s18
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'I Want It All',
+            year: 2008,
+            duration: 279,
+            artist: 'Ashley Tisdale & Lucas Grabeel',
+            audio: this.s19
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'Can I Have This Dance',
+            year: 2008,
+            duration: 144,
+            artist: 'Vanessa Hudgens & Zac Efron',
+            audio: this.s20
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'A Night to Remember',
+            year: 2008,
+            duration: 239,
+            artist: 'Cast of HSM',
+            audio: this.s21
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'Just Wanna Be With You',
+            year: 2008,
+            duration: 158,
+            artist: 'Vanessa Hudgens & Zac Efron',
+            audio: this.s22
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'The Boys Are Back',
+            year: 2008,
+            duration: 227,
+            artist: 'Corbin Bleu & Zac Efron',
+            audio: this.s23
+        }));
+        this.playlists[2].files.push(new Song({
+            name: 'Scream',
+            year: 2008,
+            duration: 237,
+            artist: 'Cast of HSM',
+            audio: this.s24
+        }));
+
+        
 
     }
 
-    playSongBySong() {
+    drawSongs(screen){
+        let xi = 840;
+        let yi = -130;
+        const stepX = 264;
+        for (let i = 0; i < this.playlists.length; i++) {
+            const playlist = this.playlists[i];
+            for (let j = 0; j < playlist.files.length; j++) {
+                const song = playlist.files[j];
+                song.nowPlaying();
+            }
+        }
+        switch (screen) {
+            case 1:
+                for (let i = 0; i < 8; i++) {
+                    const mod = i % 4;
+                    if (mod === 0) {
+                        yi += 345;
+                    }
+                    const x = xi + (stepX * mod);
+                    const y = yi ;
+                    this.app.image(this.cover1, x, y);
+                }
+                
+                break;
+            case 2:
+                for (let i = 0; i < 8; i++) {
+                    const mod = i % 4;
+                    if (mod === 0) {
+                        yi += 345;
+                    }
+                    const x = xi + (stepX * mod);
+                    const y = yi ;
+                    this.app.image(this.cover2, x, y);
+                }                
+                break;
+            case 3:
+                for (let i = 0; i < 8; i++) {
+                    const mod = i % 4;
+                    if (mod === 0) {
+                        yi += 345;
+                    }
+                    const x = xi + (stepX * mod);
+                    const y = yi ;
+                    this.app.image(this.cover3, x, y);
+                }                
+                break;
+                
+        }
+    }
+
+    playSongBySong(screen) {
         if (mouseX > 840 && mouseY > 218 && mouseX < 1053 && mouseY < 434) {
-            if (this.s1.isPlaying()) {
-                this.s1.stop();
-            } else {
-                this.s1.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[0].audio.isPlaying()) {
+                        this.playlists[0].files[0].audio.stop();
+                    } else {
+                        this.playlists[0].files[0].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[0].audio.isPlaying()) {
+                        this.playlists[1].files[0].audio.stop();
+                    } else {
+                        this.playlists[1].files[0].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[0].audio.isPlaying()) {
+                        this.playlists[2].files[0].audio.stop();
+                    } else {
+                        this.playlists[2].files[0].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1104 && mouseY > 218 && mouseX < 1319 && mouseY < 434) {
-            if (this.s2.isPlaying()) {
-                this.s2.stop();
+            if (this.playlists[0].files[1].audio.isPlaying()) {
+                this.playlists[0].files[1].audio.stop();
             } else {
-                this.s2.play();
+                this.playlists[0].files[1].audio.play();
             }
         }
         if (mouseX > 1370 && mouseY > 218 && mouseX < 1583 && mouseY < 434) {
-            if (this.s3.isPlaying()) {
-                this.s3.stop();
+            if (this.playlists[0].files[2].audio.isPlaying()) {
+                this.playlists[0].files[2].audio.stop();
             } else {
-                this.s3.play();
+                this.playlists[0].files[2].audio.play();
             }
         }
         if (mouseX > 1633 && mouseY > 218 && mouseX < 1843 && mouseY < 434) {
-            if (this.s4.isPlaying()) {
-                this.s4.stop();
+            if (this.playlists[0].files[3].audio.isPlaying()) {
+                this.playlists[0].files[3].audio.stop();
             } else {
-                this.s4.play();
+                this.playlists[0].files[3].audio.play();
             }
         }
         if (mouseX > 840 && mouseY > 559 && mouseX < 1053 && mouseY < 773) {
-            if (this.s5.isPlaying()) {
-                this.s5.stop();
+            if (this.playlists[0].files[4].audio.isPlaying()) {
+                this.playlists[0].files[4].audio.stop();
             } else {
-                this.s5.play();
+                this.playlists[0].files[4].audio.play();
             }
         }
         if (mouseX > 1104 && mouseY > 559 && mouseX < 1319 && mouseY < 773) {
-            if (this.s6.isPlaying()) {
-                this.s6.stop();
+            if (this.playlists[0].files[5].audio.isPlaying()) {
+                this.playlists[0].files[5].audio.stop();
             } else {
-                this.s6.play();
+                this.playlists[0].files[5].audio.play();
             }
         }
         if (mouseX > 1370 && mouseY > 559 && mouseX < 1583 && mouseY < 773) {
-            if (this.s7.isPlaying()) {
-                this.s7.stop();
+            if (this.playlists[0].files[6].audio.isPlaying()) {
+                this.playlists[0].files[6].audio.stop();
             } else {
-                this.s7.play();
+                this.playlists[0].files[6].audio.play();
             }
         }
         if (mouseX > 1633 && mouseY > 559 && mouseX < 1843 && mouseY < 773) {
-            if (this.s8.isPlaying()) {
-                this.s8.stop();
+            if (this.playlists[0].files[7].audio.isPlaying()) {
+                this.playlists[0].files[7].audio.stop();
             } else {
-                this.s8.play();
+                this.playlists[0].files[7].audio.play();
             }
         }
 
-    }
-
-    nowPlaying() {
-        for (let i = 0; i < this.playlists.length; i++) {
-            const list = this.playlists[i];
-            for (let j = 0; j < list.length; j++) {
-                const song = list.files[j];
-                if (song.audio.isPlaying()) {
-                    console.log(song.audio);
-                }
-            }
-        }
-    }
-
-    pause() {
-        for (let i = 0; i < this.playlists.length; i++) {
-            const list = this.playlists[i];
-            for (let j = 0; j < list.length; j++) {
-                const song = list.files[j];
-                if (song.audio.isPlaying()) {
-                    song.audio.pause();
-                }
-            }
-        }
-    }
-
-    stop() {
-        for (let i = 0; i < this.playlists.length; i++) {
-            const list = this.playlists[i];
-            for (let j = 0; j < list.length; j++) {
-                const song = list.files[j];
-                song.audio.stop();
-            }
-        }
     }
 
     playPlaylist(screen) {
@@ -264,4 +372,19 @@ class MusicPlayer {
 
         }
     }
+
+    time(){
+        for (let i = 0; i < this.playlists.length; i++) {
+            const playlist = this.playlists[i];
+            for (let j = 0; j < playlist.files.length; j++) {
+                const song = playlist.files[j];
+                if (mouseX > 934 && mouseY > 925 && mouseX < 981 && mouseY < 970) {
+                    song.showCurrentTime();
+                    song.showDuration();
+                    
+                }
+            }
+        }
+    }
+
 }

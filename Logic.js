@@ -5,6 +5,7 @@ class Logic {
         this.hsm1 = this.app.loadImage('sources/HSM1.png');
         this.hsm2 = this.app.loadImage('sources/HSM2.png');
         this.hsm3 = this.app.loadImage('sources/HSM3.png');
+        this.p4 = this.app.loadImage('sources/P4.png');
         this.screen = 0;
     }
 
@@ -21,6 +22,9 @@ class Logic {
                 break;
             case 3:
                 this.app.image(this.hsm3, 0, 0);
+                break;
+            case 4:
+                this.app.image(this.p4, 0, 0);
                 break;
         }
     }

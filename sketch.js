@@ -16,6 +16,9 @@ function setup() {
 function draw() {
   background(220);
   logic.showScreen();
+  
+  player.drawSongs(logic.screen);
+  //player.showPlaying();
   /*image(prueba,0,0);
   textFont(fontB);
       fill(255);
@@ -35,23 +38,29 @@ function draw() {
 
 function mousePressed() {
   console.log('x:' + mouseX + 'y:' + mouseY);
+  player.playPlaylist(logic.screen);
+  player.playSongBySong(logic.screen);
   switch (logic.screen) {
     case 0:
-      if (mouseX > 182 && mouseY > 400 && mouseX < 654 && mouseY < 872) {
+      if (mouseX > 197 && mouseY > 640 && mouseX < 554 && mouseY < 998) {
         logic.screen = 1;
       }
-      if (mouseX > 717 && mouseY > 400 && mouseX < 1197 && mouseY < 872) {
+      if (mouseX > 584 && mouseY > 640 && mouseX < 945 && mouseY < 998) {
         logic.screen = 2;
       }
-      if (mouseX > 1252 && mouseY > 400 && mouseX < 1736 && mouseY < 872) {
+      if (mouseX > 976 && mouseY > 640 && mouseX < 1333 && mouseY < 998) {
         logic.screen = 3;
+      }
+      if (mouseX > 1361 && mouseY > 640 && mouseX < 1722 && mouseY < 998) {
+        logic.screen = 4;
       }
       break;
     case 1:
       if (mouseX > 347 && mouseY > 32 && mouseX < 486 && mouseY < 52) {
         logic.screen = 0;
       }
-      player.playSongBySong();
+      
+      
       break;
     case 2:
       if (mouseX > 347 && mouseY > 32 && mouseX < 486 && mouseY < 52) {
@@ -63,6 +72,12 @@ function mousePressed() {
         logic.screen = 0;
       }
       break;
+    case 4:
+      if (mouseX > 347 && mouseY > 32 && mouseX < 486 && mouseY < 52) {
+        logic.screen = 0;
+      }
+      break;
   }
-  player.playPlaylist(logic.screen);
+  
+  
 }
