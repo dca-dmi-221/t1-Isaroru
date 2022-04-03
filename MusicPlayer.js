@@ -31,9 +31,13 @@ class MusicPlayer {
         this.cover1 = this.app.loadImage('sources/cover 1.png');
         this.cover2 = this.app.loadImage('sources/cover 2.png');
         this.cover3 = this.app.loadImage('sources/cover 3.png');
+        this.coverp4 = this.app.loadImage('sources/cover 4.png');
 
         this.playlists = [];
         this.init();
+        this.nowPlaying ;
+        this.volumeSlider = new Slider('volume');
+        this.durationSlider = new Slider('head');
     }
 
     init() {
@@ -226,7 +230,9 @@ class MusicPlayer {
             const playlist = this.playlists[i];
             for (let j = 0; j < playlist.files.length; j++) {
                 const song = playlist.files[j];
-                song.nowPlaying();
+                this.nowPlaying = song.nowPlaying();
+                song.showCurrentTime();
+                song.showDuration();
             }
         }
         switch (screen) {
@@ -240,7 +246,8 @@ class MusicPlayer {
                     const y = yi ;
                     this.app.image(this.cover1, x, y);
                 }
-                
+                this.durationSlider.drawSlider();
+                this.volumeSlider.drawSlider();
                 break;
             case 2:
                 for (let i = 0; i < 8; i++) {
@@ -252,6 +259,8 @@ class MusicPlayer {
                     const y = yi ;
                     this.app.image(this.cover2, x, y);
                 }                
+                this.durationSlider.drawSlider();
+                this.volumeSlider.drawSlider();
                 break;
             case 3:
                 for (let i = 0; i < 8; i++) {
@@ -262,7 +271,13 @@ class MusicPlayer {
                     const x = xi + (stepX * mod);
                     const y = yi ;
                     this.app.image(this.cover3, x, y);
-                }                
+                }             
+                this.durationSlider.drawSlider();   
+                this.volumeSlider.drawSlider();
+                break;
+            case 4:
+                this.durationSlider.drawSlider();
+                this.volumeSlider.drawSlider();
                 break;
                 
         }
@@ -292,58 +307,242 @@ class MusicPlayer {
                         this.playlists[2].files[0].audio.play();
                     }
                     break;
+                case 3:
+                    if (this.playlists[3].files[0].audio.isPlaying()) {
+                        this.playlists[3].files[0].audio.stop();
+                    } else {
+                        this.playlists[3].files[0].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1104 && mouseY > 218 && mouseX < 1319 && mouseY < 434) {
-            if (this.playlists[0].files[1].audio.isPlaying()) {
-                this.playlists[0].files[1].audio.stop();
-            } else {
-                this.playlists[0].files[1].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[1].audio.isPlaying()) {
+                        this.playlists[0].files[1].audio.stop();
+                    } else {
+                        this.playlists[0].files[1].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[1].audio.isPlaying()) {
+                        this.playlists[1].files[1].audio.stop();
+                    } else {
+                        this.playlists[1].files[1].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[1].audio.isPlaying()) {
+                        this.playlists[2].files[1].audio.stop();
+                    } else {
+                        this.playlists[2].files[1].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[1].audio.isPlaying()) {
+                        this.playlists[3].files[1].audio.stop();
+                    } else {
+                        this.playlists[3].files[1].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1370 && mouseY > 218 && mouseX < 1583 && mouseY < 434) {
-            if (this.playlists[0].files[2].audio.isPlaying()) {
-                this.playlists[0].files[2].audio.stop();
-            } else {
-                this.playlists[0].files[2].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[2].audio.isPlaying()) {
+                        this.playlists[0].files[2].audio.stop();
+                    } else {
+                        this.playlists[0].files[2].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[2].audio.isPlaying()) {
+                        this.playlists[1].files[2].audio.stop();
+                    } else {
+                        this.playlists[1].files[2].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[2].audio.isPlaying()) {
+                        this.playlists[2].files[2].audio.stop();
+                    } else {
+                        this.playlists[2].files[2].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[2].audio.isPlaying()) {
+                        this.playlists[3].files[2].audio.stop();
+                    } else {
+                        this.playlists[3].files[2].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1633 && mouseY > 218 && mouseX < 1843 && mouseY < 434) {
-            if (this.playlists[0].files[3].audio.isPlaying()) {
-                this.playlists[0].files[3].audio.stop();
-            } else {
-                this.playlists[0].files[3].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[3].audio.isPlaying()) {
+                        this.playlists[0].files[3].audio.stop();
+                    } else {
+                        this.playlists[0].files[3].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[3].audio.isPlaying()) {
+                        this.playlists[1].files[3].audio.stop();
+                    } else {
+                        this.playlists[1].files[3].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[3].audio.isPlaying()) {
+                        this.playlists[2].files[3].audio.stop();
+                    } else {
+                        this.playlists[2].files[3].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[3].audio.isPlaying()) {
+                        this.playlists[3].files[3].audio.stop();
+                    } else {
+                        this.playlists[3].files[3].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 840 && mouseY > 559 && mouseX < 1053 && mouseY < 773) {
-            if (this.playlists[0].files[4].audio.isPlaying()) {
-                this.playlists[0].files[4].audio.stop();
-            } else {
-                this.playlists[0].files[4].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[4].audio.isPlaying()) {
+                        this.playlists[0].files[4].audio.stop();
+                    } else {
+                        this.playlists[0].files[4].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[4].audio.isPlaying()) {
+                        this.playlists[1].files[4].audio.stop();
+                    } else {
+                        this.playlists[1].files[4].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[4].audio.isPlaying()) {
+                        this.playlists[2].files[4].audio.stop();
+                    } else {
+                        this.playlists[2].files[4].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[4].audio.isPlaying()) {
+                        this.playlists[3].files[4].audio.stop();
+                    } else {
+                        this.playlists[3].files[4].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1104 && mouseY > 559 && mouseX < 1319 && mouseY < 773) {
-            if (this.playlists[0].files[5].audio.isPlaying()) {
-                this.playlists[0].files[5].audio.stop();
-            } else {
-                this.playlists[0].files[5].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[5].audio.isPlaying()) {
+                        this.playlists[0].files[5].audio.stop();
+                    } else {
+                        this.playlists[0].files[5].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[5].audio.isPlaying()) {
+                        this.playlists[1].files[5].audio.stop();
+                    } else {
+                        this.playlists[1].files[5].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[5].audio.isPlaying()) {
+                        this.playlists[2].files[5].audio.stop();
+                    } else {
+                        this.playlists[2].files[5].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[5].audio.isPlaying()) {
+                        this.playlists[3].files[5].audio.stop();
+                    } else {
+                        this.playlists[3].files[5].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1370 && mouseY > 559 && mouseX < 1583 && mouseY < 773) {
-            if (this.playlists[0].files[6].audio.isPlaying()) {
-                this.playlists[0].files[6].audio.stop();
-            } else {
-                this.playlists[0].files[6].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[6].audio.isPlaying()) {
+                        this.playlists[0].files[6].audio.stop();
+                    } else {
+                        this.playlists[0].files[6].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[6].audio.isPlaying()) {
+                        this.playlists[1].files[6].audio.stop();
+                    } else {
+                        this.playlists[1].files[6].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[6].audio.isPlaying()) {
+                        this.playlists[2].files[6].audio.stop();
+                    } else {
+                        this.playlists[2].files[6].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[6].audio.isPlaying()) {
+                        this.playlists[3].files[6].audio.stop();
+                    } else {
+                        this.playlists[3].files[6].audio.play();
+                    }
+                    break;
             }
         }
         if (mouseX > 1633 && mouseY > 559 && mouseX < 1843 && mouseY < 773) {
-            if (this.playlists[0].files[7].audio.isPlaying()) {
-                this.playlists[0].files[7].audio.stop();
-            } else {
-                this.playlists[0].files[7].audio.play();
+            switch (screen) {
+                case 1:
+                    if (this.playlists[0].files[7].audio.isPlaying()) {
+                        this.playlists[0].files[7].audio.stop();
+                    } else {
+                        this.playlists[0].files[7].audio.play();
+                    }
+                    break;
+                case 2:
+                    if (this.playlists[1].files[7].audio.isPlaying()) {
+                        this.playlists[1].files[7].audio.stop();
+                    } else {
+                        this.playlists[1].files[7].audio.play();
+                    }
+                    break;
+                case 3:
+                    if (this.playlists[2].files[7].audio.isPlaying()) {
+                        this.playlists[2].files[7].audio.stop();
+                    } else {
+                        this.playlists[2].files[7].audio.play();
+                    }
+                    break;
+                case 4:
+                    if (this.playlists[3].files[7].audio.isPlaying()) {
+                        this.playlists[3].files[7].audio.stop();
+                    } else {
+                        this.playlists[3].files[7].audio.play();
+                    }
+                    break;
+                default:
+                    this.playlists.files.audio.stop()
+                    break;
             }
         }
-
     }
 
     playPlaylist(screen) {
@@ -351,21 +550,21 @@ class MusicPlayer {
             case 1:
                 if (this.playlists[0].files[0].audio.isPlaying()) {
                     this.playlists[0].files[0].audio.stop();
-                } else if (mouseX > 510 && mouseY > 731 && mouseX < 654 && mouseY < 784) {
+                } else if (mouseX > 100 && mouseY > 788 && mouseX < 247 && mouseY < 839) {
                     this.playlists[0].files[0].audio.play();
                 }
                 break;
             case 2:
                 if (this.playlists[1].files[0].audio.isPlaying()) {
                     this.playlists[1].files[0].audio.stop();
-                } else if (mouseX > 510 && mouseY > 731 && mouseX < 654 && mouseY < 784) {
+                } else if (mouseX > 100 && mouseY > 788 && mouseX < 247 && mouseY < 839) {
                     this.playlists[1].files[0].audio.play();
                 }
                 break;
             case 3:
                 if (this.playlists[2].files[0].audio.isPlaying()) {
                     this.playlists[2].files[0].audio.stop();
-                } else if (mouseX > 510 && mouseY > 731 && mouseX < 654 && mouseY < 784) {
+                } else if (mouseX > 100 && mouseY > 788 && mouseX < 247 && mouseY < 839) {
                     this.playlists[2].files[0].audio.play();
                 }
                 break;
@@ -373,18 +572,30 @@ class MusicPlayer {
         }
     }
 
-    time(){
-        for (let i = 0; i < this.playlists.length; i++) {
-            const playlist = this.playlists[i];
-            for (let j = 0; j < playlist.files.length; j++) {
-                const song = playlist.files[j];
-                if (mouseX > 934 && mouseY > 925 && mouseX < 981 && mouseY < 970) {
-                    song.showCurrentTime();
-                    song.showDuration();
-                    
-                }
-            }
+    drawNewPlaylist(screen){
+        if (screen === 0) {
+            this.app.image(this.coverp4, 1361, 640);
+        }
+        if (screen === 4) {
+            textFont(fontB);
+            fill(255);
+            textSize(31);
+            text(this.playlists[3].name,1035,147);
         }
     }
 
+    createPlaylist(screen){
+        if (screen === 0 && mouseX > 1361 && mouseY > 640 && mouseX < 1722 && mouseY < 998) {
+            const pName = window.prompt('Playlist Name:');
+            this.playlists.push(new Playlist({
+                name: pName,
+            }));
+            this.drawNewPlaylist(screen);
+        }
+    }
+
+    sliderDrag(){
+        this.volumeSlider.dragSlider(this.nowPlaying);
+        this.durationSlider.dragSlider(this.nowPlaying);
+    }
 }
