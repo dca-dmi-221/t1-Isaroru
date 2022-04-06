@@ -1,33 +1,14 @@
 class Song {
-    constructor({name, year, duration, artist,audio},app) {
+    constructor({name, year, duration, artist,audio}) {
         this.duration = duration;
         this.name = name;
         this.artist = artist;
         this.year = year;
         this.audio = audio; 
-        this.app = app;
-        this.nowPlaying();
     }
 
-    nowPlaying() {
-        if (this.audio.isPlaying()) {
-            textFont(fontB);
-            fill(255);
-            textSize(51);
-            text(this.name,98,680);
-            textSize(25);
-            text(this.artist,98,722);
-            text(this.name,140,943);
-            textFont(font);
-            text(this.duration + ' seconds - ' + this.year + ' From High School Musical',98,758);
-            textSize(17);
-            text(this.duration + ' seconds - ' + this.year + ' From High School Musical',140,970);
-        }
-    }
-
-    play(){
+    playS(){
         this.audio.play();
-        console.log(this.audio)
     }
 
     resume(){
@@ -44,7 +25,7 @@ class Song {
         }
     }
 
-    stop(){
+    stopS(){
         if (this.audio.isPlaying()) {
             this.audio.stop();
         }
@@ -69,4 +50,5 @@ class Song {
             text('/ '+lenght,1528,942);
         }
     }
+
 }

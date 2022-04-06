@@ -1,14 +1,7 @@
 class Slider {
   constructor(type) {
-
-    this.ballD = {
-      x: 64,
-      y: 1013,
-      r: 16
-    }
-
     this.ballV = {
-      x: 1760,
+      x: 1800,
       y: 950,
       r: 16
     }
@@ -17,7 +10,7 @@ class Slider {
       x: 64,
       y: 1010,
       w: 1779,
-      h: 6
+      h: 10
     }
 
     this.rectangleV = {
@@ -28,57 +21,59 @@ class Slider {
     }
 
     this.type = type;
-
   }
 
-  drawSlider(time, duration) {
+  drawSliderD(currentTime,duration) {
     noStroke();
-    fill(255);
-    if (this.type === "head") {
-      rectMode(CORNER);
-      rect(this.rectangleD.x, this.rectangleD.y, this.rectangleD.w, this.rectangleD.h)
-      ellipse(this.ballD.x, this.ballD.y, this.ballD.r)
-    } else if (this.type === "volume") {
-      rectMode(CORNER);
-      rect(this.rectangleV.x, this.rectangleV.y, this.rectangleV.w, this.rectangleV.h)
-      ellipse(this.ballV.x, this.ballV.y, this.ballV.r)
-    }
+    fill(191,195,186);
+    rect(this.rectangleD.x, this.rectangleD.y, this.rectangleD.w, this.rectangleD.h);
+    const mapTime = map(currentTime,0,duration,0,this.rectangleD.w);
+    fill(255,255,0);
+    rect(64,1010,mapTime,15);
+  }
+
+  drawSliderV(){
+    noStroke();
+    rectMode(CORNER);
+    fill(191,195,186);
+    rect(this.rectangleV.x, this.rectangleV.y, this.rectangleV.w, this.rectangleV.h);
+    fill(255,255,0);
+    ellipse(this.ballV.x, this.ballV.y, this.ballV.r)
   }
 
   dragSlider(song) {
-    if (dist(mouseX, mouseY, this.ballD.x, this.ballD.y) < this.ballD.r) {
       const limites = {
         x1: this.rectangleD.x,
         x2: this.rectangleD.x + this.rectangleD.w,
+        y1: this.rectangleD.y-2,
+        y2: this.rectangleD.y + this.rectangleD.h+2
       }
-      const isInRange = mouseX > limites.x1 && mouseX < limites.x2;
+      const isInRange = mouseX > limites.x1 && mouseX < limites.x2 && mouseY > limites.y1 && mouseY < limites.y2;
       if (isInRange) {
-        this.ballD.x = mouseX;
-
-        if (type === "head") {
+        if (this.type === "head") {
           const head = map(mouseX, limites.x1, limites.x2, 0, song.duration());
-          song.currentTime(head);
+          //song.currentTime(head);
+          song.jump(head);
+          
         }
-      }
     }
 
-    if (dist(mouseX, mouseY, this.ballV.x, this.ballV.y) < this.ballV.r) {
-      const limites = {
+    if (dist(mouseX, this.ballV.x, this.ballV.y) < this.ballV.r) {
+      const limitesV = {
         x1: this.rectangleV.x,
         x2: this.rectangleV.x + this.rectangleV.w,
+        y1: this.rectangleV.y,
+        y2: this.rectangleV.y + this.rectangleV.h
       }
-      const isInRange = mouseX > limites.x1 && mouseX < limites.x2;
+      const isInRange = mouseX > limitesV.x1 && mouseX < limitesV.x2 && mouseY > limitesV.y1 && mouseY < limitesV.y2;
       if (isInRange) {
-        this.ballV.x = mouseX;
-
         if (this.type === 'volume') {
-          const volume = map(mouseX, limites.x1, limites.x2, 0, 100) / 100;
-          song.setVolume(volume);
-          this.ball.x = mouseX;
+          const volume = map(mouseX, limitesV.x1, limitesV.x2, 0, 100) / 100;
+          song.audio.setVolume(volume);
+          this.ballV.x = mouseX;
         }
-        
       }
     }    
-
   }
+
 }

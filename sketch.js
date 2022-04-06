@@ -5,8 +5,8 @@ let fontB;
 
 function setup() {
   createCanvas(1920, 1080);
-  logic = new Logic(this);
-  player = new MusicPlayer(this);
+  logic = new Logic();
+  player = new MusicPlayer();
   font = loadFont('sources/framd.ttf');
   fontB = loadFont('sources/FranklinGothic.ttf');
 }
@@ -14,19 +14,22 @@ function setup() {
 function draw() {
   background(220);
   logic.showScreen();
-  
-  player.drawSongs(logic.screen);
-  //player.drawNewPlaylist(logic.screen);
+  logic.drawSongs();
+  player.drawNewPlaylist(logic.screen);
+  player.drawInfo(logic.screen);
 
 }
 
 function mousePressed() {
   console.log('x:' + mouseX + 'y:' + mouseY);
-
-  logic.switchScreen();
+  logic.switchScreen(player.newPlaylist);
+  player.pickPlaylist();
   player.playPlaylist(logic.screen);
+  player.previous(logic.screen);
+  player.nextSong(logic.screen);
   player.createPlaylist(logic.screen);
-  player.drawNewPlaylist(logic.screen);
   player.playSongBySong(logic.screen);
-  player.sliderDrag()
+  player.sliderDrag(logic.screen);
+  player.deletePlaylist(logic.screen);
+  
 }
